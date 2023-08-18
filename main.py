@@ -1,4 +1,3 @@
-# This is a sample Python script.
 import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -6,22 +5,25 @@ from kivy.uix.boxlayout import BoxLayout
 kivy.require('2.2.1')
 
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class TestButton(BoxLayout):
+    state = 0
+
+    def __init__(self, **kwargs):
+        super(TestButton, self).__init__(**kwargs)
+
+    def pressed(self):
+        if self.state == 0:
+            self.button_label.text = "You pressed it!"
+            self.state = 1
+        else:
+            self.button_label.text = "Press me!"
+            self.state = 0
+
 
 class Game(App):
     def build(self):
-        return BoxLayout()
-game = Game()
-game.run()
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+        return TestButton()  # Create an instance of TestButton
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    Game().run()
